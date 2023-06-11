@@ -1,0 +1,55 @@
+#main-cont{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(180deg,rgba(126, 196, 223, 0.612),slategray) ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+#inp-cont{
+    width: 30%;
+    height: 80vh;
+    background-color: rgba(0, 255, 255, 0.066);
+    text-align: center;
+    border-radius: 25px;
+    font-size: 1.5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2vh;
+}
+.heading{
+    color: cornsilk;
+}
+#opt-cont{
+    width: 100%;
+    height: 70%;
+    background-color: rgb(47, 68, 70);
+    margin-top: 3vh;
+    overflow-y: auto;
+}
+#submit{
+    cursor: pointer;
+    color: green;
+    width: 100%;
+    height: 5vh;
+    background-color: rgb(8, 82, 23);
+    margin-top: 2vh;
+    font-size: 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: green;
+    font-family: 'Poppins','sans-serif';
+}
+.inputers{
+    width: 100%;
+    height: 4vh;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
