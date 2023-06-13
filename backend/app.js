@@ -11,10 +11,11 @@ app.post("/getData/:pageNo",async(req,res,next)=>{
     const {arr} = req.body;
     const {pageNo} = req.params;
 
-    let startIndex = (pageNo-1)*3;
-    let endIndex = startIndex+2;
+    const pageSize = Math.ceil(arr.length / 3); 
+  const startIndex = (pageNo - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize, arr.length);
 
-    let res_arr = arr.slice(startIndex,endIndex+1);
+    let res_arr = arr.slice(startIndex,endIndex);
 
      res.status(201).json({
         success: true,

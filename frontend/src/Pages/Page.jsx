@@ -9,9 +9,11 @@ const Page = () => {
   let [obtData, setObtData] = useState([]);
   let [weatherCoords, setWeatherCoords] = useState([]);
   let [actWeather,setActWeather] = useState([]);
+  let [active,setActive] = useState(1);
 
   const sendData = async (pageNo) => {
     let arr = JSON.parse(localStorage.getItem("arr"));
+    setActive(pageNo);
     if(weatherCoords.length !== 0){
       setWeatherCoords([]);
       setActWeather([]);
@@ -23,6 +25,10 @@ const Page = () => {
       return error;
     }
   };
+
+  useEffect(()=>{
+     sendData(1);  
+  },[])
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -38,8 +44,12 @@ const Page = () => {
             ]);
             setActWeather((prev)=>[
                ...prev,
-                weatherData.data.main
+               {
+                temp: weatherData.data.main.temp,
+                name: weatherData.data.name
+               },
             ]);
+            console.log(actWeather);
           }
         } catch (error) {
           console.error("Error fetching weather data:", error);
@@ -48,7 +58,7 @@ const Page = () => {
     };
 
     fetchWeatherData();
-  }, [obtData]);
+  }, [obtData]); 
 
   return (
     <>
@@ -56,7 +66,7 @@ const Page = () => {
         <div id="map-container">
           <MapContainer
             center={[19.1655, 73.0751]}
-            zoom={13}
+            zoom={5}
             scrollWheelZoom={true}
             className="mapcont"
           >
@@ -76,7 +86,8 @@ const Page = () => {
                   }
                 >
                   <Popup>
-                    {actWeather[ind].min_temp}
+                    City:- {actWeather[ind].name} <br/>
+                    Temperature :- {(actWeather[ind].temp-273).toFixed(2)}°C
                   </Popup>
                 </Marker>
             ))}
@@ -84,13 +95,13 @@ const Page = () => {
         </div>
         <div id="paginate-cont">
         
-          <button className="pag-btn" onClick={()=>{
+          <button className={active === 1 ? "pag-btn extra" : "pag-btn"} onClick={()=>{
             sendData(1);
           }}>1</button>
-          <button className="pag-btn" onClick={()=>{
+          <button className={active === 2 ? "pag-btn extra" : "pag-btn"} onClick={()=>{
             sendData(2);
           }}>2</button>
-          <button className="pag-btn" onClick={()=>{
+          <button className={active === 3 ? "pag-btn extra" : "pag-btn"} onClick={()=>{
             sendData(3);
           }}>3</button>
         </div>    
@@ -100,19 +111,3 @@ const Page = () => {
 };
 
 export default Page;
-
-/*
-<Marker
-          position={[19.1655, 73.0751]}
-          icon={
-            new Icon({
-              iconUrl: markerIconPng,
-              iconSize: [25, 41],
-              iconAnchor: [12, 41],
-            })
-          }
-        >
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-*/

@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const [text, setText] = useState("");
   let [arr, setArr] = useState([""]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let item = localStorage.getItem("arr");
@@ -68,6 +70,11 @@ const Main = () => {
         return new_arr;
       });
   };
+
+  const handleSubmit = () => {
+      navigate("/page");
+      window.location.reload();
+  }
 
   return (
     <>
@@ -155,7 +162,7 @@ const Main = () => {
               </div>
             ))}
           </div>
-          <button id="submit">
+          <button id="submit" onClick={()=>handleSubmit()}>
             Submit
           </button>
         </div>
