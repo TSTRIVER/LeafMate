@@ -35,8 +35,9 @@ const Main = () => {
         theme: "light",
       });
     }
+    const city = text.toLowerCase();
 
-    if (arr.find((ele) => ele === text)) {
+    if (arr.find((ele) => ele === city)) {
       return toast.error("City Already Enterd!", {
         position: "top-right",
         autoClose: 5000,
@@ -48,8 +49,6 @@ const Main = () => {
         theme: "light",
       });
     }
-
-    const city = text.toLowerCase();
 
     setArr((prev) => {
       prev[prev.length - 1] = city;
