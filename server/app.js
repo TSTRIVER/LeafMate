@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 
 const corsOption = {
-  origin: "http://localhost:3000",
+  origin: "https://leafmate.netlify.app",
   methods: "GET,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
