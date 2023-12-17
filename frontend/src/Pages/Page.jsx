@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "./page.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
+import api from "../Http/index";
 
 const Page = () => {
   let [obtData, setObtData] = useState([]);
@@ -19,7 +19,7 @@ const Page = () => {
       setActWeather([]);
     }
     try {
-      const { data } = await axios.post(`/getData/${pageNo}`, { arr });
+      const { data } = await api.post(`/getData/${pageNo}`, { arr });
       setObtData(data.res_arr);
     } catch (error) {
       return error;
@@ -35,7 +35,7 @@ const Page = () => {
       if (obtData && obtData.length > 0) {
         try {
           for (const item of obtData) {
-            const weatherData = await axios.get(
+            const weatherData = await api.get(
               ` https://api.openweathermap.org/data/2.5/weather?q=${item}&appid=${process.env.REACT_APP_API_KEY}`
             );
             setWeatherCoords((prevResults) => [
