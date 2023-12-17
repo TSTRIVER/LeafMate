@@ -18,9 +18,9 @@ app.post("/getData/:pageNo", async (req, res, next) => {
   const { arr } = req.body;
   const { pageNo } = req.params;
 
-  const pageSize = Math.ceil(arr.length / 3);
+  const pageSize = Math.ceil((arr.length - 1) / 3);
   const startIndex = (pageNo - 1) * pageSize;
-  const endIndex = Math.min(startIndex + pageSize, arr.length);
+  const endIndex = Math.min(startIndex + pageSize, arr.length-1);
 
   let res_arr = arr.slice(startIndex, endIndex);
 
